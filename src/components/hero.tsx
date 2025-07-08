@@ -22,6 +22,11 @@ export default function Hero() {
       <div className="relative z-10 w-full h-full flex flex-col">
         {/* Top Section: Logo and Navbar */}
         <header className="flex justify-between items-center p-6 sm:p-10 lg:p-16 w-full">
+          <img
+            src="/images/logo.png" // Path to your uploaded logo
+            alt="B17 Decorate Logo"
+            className="h-50 sm:h-52 lg:h-54 rounded-full " // Adjusted size for top-left
+          />
           <Navbar />
         </header>
 
