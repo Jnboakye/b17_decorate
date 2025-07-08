@@ -1,6 +1,5 @@
 import Hero from '../components/hero';
 import Services from '../components/services';
-import ProjectCard from '../components/projects';
 import Contact from '../components/contact';
 import Footer from '../components/footer';
 import Projects from '../components/projects';
