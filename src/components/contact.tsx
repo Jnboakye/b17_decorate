@@ -24,7 +24,7 @@ export default function Contact() {
             <p className="text-gray-700 mb-8 font-inter">
               {" "}
               {/* Increased bottom margin */}
-              We'd love to hear from you! Feel free to contact us through the
+              We&apos;d love to hear from you! Feel free to contact us through the
               details below or connect on social media.
             </p>
             <div className="space-y-6 text-gray-700 font-inter">
