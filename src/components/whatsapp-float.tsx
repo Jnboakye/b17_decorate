@@ -9,6 +9,7 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with B17 on WhatsApp"
+      data-track-place="Floating button"
       className="group fixed right-4 bottom-4 z-40 flex items-center gap-3 sm:right-6 sm:bottom-6"
     >
       <span className="pointer-events-none hidden translate-x-2 rounded-full bg-navy-900 px-4 py-2 text-sm font-semibold text-linen-50 opacity-0 shadow-lg transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 sm:block">

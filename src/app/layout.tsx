@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { faqs, site } from "@/content/site";
 import { siteUrl } from "@/lib/site-url";
+import Analytics from "@/components/analytics";
 
 const fraunces = localFont({
   src: [
@@ -112,6 +113,19 @@ var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if
 els.forEach(function(el){io.observe(el)})}
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init)}else{init()}})();`;
 
+/**
+ * Visitor tracking (Umami) runs only on the live website. It stays off on your computer
+ * (localhost) and on Netlify preview builds, so your own testing doesn't end up in the
+ * stats. The Website ID lives in src/content/site.ts.
+ */
+const umamiWebsiteId: string = site.umamiWebsiteId.trim();
+const trackVisitors =
+  umamiWebsiteId !== "" &&
+  process.env.NODE_ENV === "production" &&
+  !siteUrl.includes("localhost") &&
+  process.env.CONTEXT !== "deploy-preview" &&
+  process.env.CONTEXT !== "branch-deploy";
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${fraunces.variable} ${manrope.variable}`} suppressHydrationWarning>
@@ -122,7 +136,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-dvh bg-linen-100 font-sans text-ink antialiased">{children}</body>
+      <body className="min-h-dvh bg-linen-100 font-sans text-ink antialiased">
+        {children}
+        {trackVisitors && <Analytics websiteId={umamiWebsiteId} />}
+      </body>
     </html>
   );
 }

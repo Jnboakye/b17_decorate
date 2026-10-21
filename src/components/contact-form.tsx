@@ -3,6 +3,7 @@
 import { useRef, useState, type FormEvent } from "react";
 import { propertyOptions, serviceOptions } from "@/content/site";
 import { buildEnquiryMessage, whatsappUrl } from "@/lib/whatsapp";
+import { trackEvent } from "@/lib/analytics";
 import { IconArrowRight, IconCheck, IconWhatsApp } from "./icons";
 
 const fieldClass =
@@ -37,6 +38,11 @@ export default function ContactForm() {
     const url = whatsappUrl(
       buildEnquiryMessage({ name, location, phone, property, services, message }),
     );
+    // Count the enquiry in the visitor stats: which services and property type, never who sent it
+    trackEvent("Contact form submitted", {
+      services: services.length ? services.join(", ") : "None chosen",
+      property: property || "Not given",
+    });
     const win = window.open(url, "_blank");
     if (win) {
       try {
@@ -78,6 +84,7 @@ export default function ContactForm() {
             href={sentUrl}
             target="_blank"
             rel="noopener noreferrer"
+            data-track-place="Contact form (retry link)"
             className="inline-flex items-center gap-2 rounded-full bg-navy-900 px-6 py-3.5 text-[0.9375rem] font-semibold text-linen-50 hover:bg-navy-800"
           >
             <IconWhatsApp className="size-5" />

@@ -34,6 +34,13 @@ export const site = {
 
   /** Link that opens "Write a review" on the B17 Google Business Profile. */
   googleReviewUrl: "https://g.page/r/CZutK1OunE3cEBM/review",
+
+  /**
+   * Visitor tracking (Umami — umami.is). Paste your Umami "Website ID" between the
+   * quotes (it looks like "1a2b3c4d-5e6f-…"). Leave it empty to switch tracking off.
+   * Only visits to the live website are counted — not you running the site on your computer.
+   */
+  umamiWebsiteId: "828ee103-fca7-40c9-87cc-7a33457b9a36",
 } as const;
 
 export const navLinks = [
