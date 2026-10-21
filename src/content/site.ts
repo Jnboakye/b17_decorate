@@ -1,6 +1,6 @@
 /**
  * ─────────────────────────────────────────────────────────────
- *  B17 Windows & Curtains — website content
+ *  B17 Window Blinds & Curtains — website content
  * ─────────────────────────────────────────────────────────────
  *  Most of the text on the website lives in this one file, so you
  *  can update it without touching the page layout.
@@ -10,7 +10,7 @@
  */
 
 export const site = {
-  name: "B17 Windows & Curtains",
+  name: "B17 Window Blinds & Curtains",
   shortName: "B17",
   tagline: "Made-to-measure curtains, blinds & window automation",
   description:
@@ -34,6 +34,21 @@ export const site = {
 
   /** Link that opens "Write a review" on the B17 Google Business Profile. */
   googleReviewUrl: "https://g.page/r/CZutK1OunE3cEBM/review",
+
+  /**
+   * Opening hours in Ghana time (GMT), used for the live "Open now / Closed" sign.
+   * 24-hour clock, [opens, closes]. null = closed all day.
+   */
+  timeZone: "Africa/Accra",
+  hours: {
+    sunday: null,
+    monday: ["08:00", "18:00"],
+    tuesday: ["08:00", "18:00"],
+    wednesday: ["08:00", "18:00"],
+    thursday: ["08:00", "18:00"],
+    friday: ["08:00", "18:00"],
+    saturday: ["08:00", "18:00"],
+  },
 
   /**
    * Visitor tracking (Umami — umami.is). Paste your Umami "Website ID" between the

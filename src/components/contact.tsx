@@ -1,5 +1,6 @@
 import ContactForm from "./contact-form";
 import Logo from "./logo";
+import OpenStatus from "./open-status";
 import { IconInstagram, IconMail, IconPhone, IconPin, IconTikTok, IconWhatsApp } from "./icons";
 import { site } from "@/content/site";
 import { consultationMessage, whatsappUrl } from "@/lib/whatsapp";
@@ -54,7 +55,9 @@ export default function Contact() {
               big or too small.
             </p>
 
-            <ul className="mt-10 space-y-5">
+            <OpenStatus variant="panel" className="mt-8" />
+
+            <ul className="mt-9 space-y-5">
               {details.map(({ icon: Icon, label, value, href, external }) => {
                 const content = (
                   <>

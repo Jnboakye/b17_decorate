@@ -1,8 +1,8 @@
 /**
- * B17 Windows & Curtains logo.
+ * B17 Window Blinds & Curtains logo.
  *
  * - <Logo /> is the full lockup: the round B17 badge (traced from the original
- *   logo.png, so it stays pin-sharp) next to the "Windows & Curtains" wordmark.
+ *   logo.png, so it stays pin-sharp) next to the "Window Blinds & Curtains" wordmark.
  *   Its size follows the font size, so scale it with a text-size class,
  *   e.g. <Logo className="text-[16px]" />. Colour follows the text colour.
  * - <Logo variant="mark" /> is the round badge on its own (an SVG; size it with
@@ -20,7 +20,7 @@ const MARK = [
 type MarkProps = SVGProps<SVGSVGElement> & { title?: string };
 
 /** The round B17 badge. */
-export function LogoMark({ title = "B17 Windows & Curtains", ...props }: MarkProps) {
+export function LogoMark({ title = "B17 Window Blinds & Curtains", ...props }: MarkProps) {
   const a11y = title ? { role: "img", "aria-label": title } : { "aria-hidden": true };
   return (
     <svg viewBox="0 23 884 884" fill="currentColor" {...a11y} {...props}>
@@ -54,7 +54,7 @@ export default function Logo(props: LogoProps) {
     <span className={`inline-flex items-center gap-[0.55em] ${className}`}>
       <LogoMark title="" className="size-[2.75em] shrink-0" />
       <span className="font-display text-[1.32em] leading-[0.98] font-normal tracking-[-0.01em] whitespace-nowrap">
-        <span className="block">Windows</span>
+        <span className="block">Window Blinds</span>
         <span className="block">
           {/* opsz 36 selects Fraunces' decorative italic ampersand even at small sizes */}
           <em

@@ -2,7 +2,8 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import heroImage from "@/assets/images/hero-drapes.jpg";
 import { ButtonLink } from "./ui";
-import { IconCurtains, IconHome, IconPin, IconRemote, IconSparkle, IconWhatsApp } from "./icons";
+import { IconCurtains, IconHome, IconPin, IconSparkle, IconWhatsApp } from "./icons";
+import OpenStatus from "./open-status";
 import { consultationMessage, whatsappUrl } from "@/lib/whatsapp";
 
 const SLATS = 11;
@@ -80,6 +81,11 @@ export default function Hero() {
             </ButtonLink>
           </div>
 
+          {/* live open / closed sign (phones & tablets) */}
+          <div className="fade-up mt-5 lg:hidden" style={{ "--delay": "880ms" } as CSSProperties}>
+            <OpenStatus variant="pill" />
+          </div>
+
           <ul
             className="fade-up mt-12 grid gap-5 border-t border-navy-900/10 pt-7 sm:grid-cols-3 sm:gap-4"
             style={{ "--delay": "950ms" } as CSSProperties}
@@ -148,29 +154,12 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* automation status card */}
+            {/* live open / closed sign (desktop) — the curtains open when B17 is open */}
             <div
-              className="fade-up absolute -bottom-7 -left-3 w-[16.5rem] sm:-left-10 sm:w-[18rem]"
+              className="fade-up absolute -bottom-8 -left-10 hidden w-[21.5rem] lg:block"
               style={{ "--delay": "1700ms" } as CSSProperties}
             >
-              <div className="flex items-center gap-3.5 rounded-2xl border border-white/60 bg-linen-50/90 p-4 shadow-[0_20px_50px_-20px_rgb(13_26_58/0.45)] backdrop-blur-md">
-                <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-navy-900 text-brass-300">
-                  <IconRemote className="size-5" />
-                </span>
-                <span className="min-w-0 flex-1">
-                  <span className="block truncate text-sm font-semibold text-navy-900">Living room curtains</span>
-                  <span className="mt-0.5 flex items-center gap-1.5 text-xs text-muted">
-                    <span className="relative flex size-2">
-                      <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500/60" />
-                      <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-                    </span>
-                    <span className="whitespace-nowrap">Opens at 6:30 am</span>
-                  </span>
-                </span>
-                <span aria-hidden="true" className="relative hidden h-6 w-11 shrink-0 rounded-full bg-navy-900 min-[400px]:block">
-                  <span className="absolute top-1 right-1 size-4 rounded-full bg-brass-300" />
-                </span>
-              </div>
+              <OpenStatus variant="card" />
             </div>
           </div>
         </div>

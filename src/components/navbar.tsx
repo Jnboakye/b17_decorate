@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Logo from "./logo";
+import OpenStatus from "./open-status";
 import { buttonClasses } from "./ui";
 import {
   IconArrowUpRight,
@@ -177,7 +178,9 @@ export default function Navbar() {
           </ul>
         </nav>
 
-        <div className="mt-8 grid gap-3">
+        <OpenStatus variant="pill" className="mt-8" />
+
+        <div className="mt-4 grid gap-3">
           <a
             href={whatsappUrl(consultationMessage)}
             target="_blank"

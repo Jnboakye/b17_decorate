@@ -23,11 +23,11 @@ const manrope = localFont({
   fallback: ["system-ui", "Segoe UI", "Arial", "sans-serif"],
 });
 
-const title = "B17 Windows & Curtains | Custom Curtains, Blinds & Window Automation in Ghana";
+const title = "B17 Window Blinds & Curtains | Curtains, Blinds & Window Automation in Ghana";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: { default: title, template: "%s | B17 Windows & Curtains" },
+  title: { default: title, template: "%s | B17 Window Blinds & Curtains" },
   description: site.description,
   keywords: [
     "curtains Ghana",
@@ -40,7 +40,8 @@ export const metadata: Metadata = {
     "curtain washing Accra",
     "CCTV installation Ghana",
     "smart home Ghana",
-    "B17 Windows & Curtains",
+    "B17 Window Blinds & Curtains",
+    "B17 Window Blinds and Curtains",
     "B17 Windows",
   ],
   alternates: { canonical: "/" },
@@ -78,6 +79,15 @@ const jsonLd = [
       addressCountry: "GH",
     },
     areaServed: { "@type": "Country", name: "Ghana" },
+    // Opening hours for Google (not shown on the page — the page shows a live open/closed sign)
+    openingHoursSpecification: Object.entries(site.hours)
+      .filter(([, h]) => h)
+      .map(([day, h]) => ({
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: day.charAt(0).toUpperCase() + day.slice(1),
+        opens: h![0],
+        closes: h![1],
+      })),
     sameAs: Object.values(site.socials),
     knowsAbout: [
       "Custom curtains",

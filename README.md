@@ -1,4 +1,4 @@
-# B17 Windows & Curtains — website
+# B17 Window Blinds & Curtains — website
 
 Made-to-measure curtains, blinds and window automation, all across Ghana.
 Built with [Next.js](https://nextjs.org) 15, React 19 and Tailwind CSS 4. Hosted on Netlify.
