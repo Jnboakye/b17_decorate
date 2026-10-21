@@ -1,0 +1,17 @@
+# Netlify settings for the B17 website.
+# Build settings stay in the Netlify UI — this file only adds redirects.
+
+# Send anyone who opens the old Netlify address to the real domain.
+# The rest of the address comes along (e.g. /sitemap.xml or ?utm_source=instagram).
+# Test deploys (e.g. deploy-preview-1--b17blindsandcurtains.netlify.app) keep working.
+[[redirects]]
+  from = "https://b17blindsandcurtains.netlify.app/*"
+  to = "https://b17blindsandcurtains.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://b17blindsandcurtains.netlify.app/*"
+  to = "https://b17blindsandcurtains.com/:splat"
+  status = 301
+  force = true
