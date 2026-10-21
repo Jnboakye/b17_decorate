@@ -1,93 +1,215 @@
-'use client';
-import React from 'react';
+import Image from "next/image";
+import type { CSSProperties } from "react";
+import curtainsImg from "@/assets/images/curtains-chevron.jpg";
+import blindsImg from "@/assets/images/blinds-venetian.jpg";
+import installImg from "@/assets/images/sheers-window.jpg";
+import { SectionHeading } from "./ui";
+import { IconArrowRight, IconBlinds, IconDrill, IconDrop, IconRemote } from "./icons";
+
+function Chips({ items, light = false }: { items: string[]; light?: boolean }) {
+  return (
+    <ul className="mt-6 flex flex-wrap gap-2">
+      {items.map((item) => (
+        <li
+          key={item}
+          className={`rounded-full px-3.5 py-1.5 text-xs font-semibold tracking-wide ${
+            light
+              ? "border border-white/25 bg-white/10 text-linen-50 backdrop-blur-sm"
+              : "border border-navy-900/10 bg-linen-100 text-navy-900/75"
+          }`}
+        >
+          {item}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function Num({ n, light = false }: { n: string; light?: boolean }) {
+  return (
+    <span
+      className={`font-display text-sm italic ${light ? "text-brass-300" : "text-brass-600"}`}
+    >
+      {n}
+    </span>
+  );
+}
 
 export default function Services() {
-  const services = [
-    {
-      title: "Curtains Installation",
-      description: "Enhance privacy and style with our bespoke curtain solutions, perfectly fitted for your space and aesthetic.",
-      icon: (
-        <svg className="w-12 h-12 text-[#1A2B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-        </svg>
-      ), // Curtain/Drapery icon
-    },
-    {
-      title: "Window Blinds Installation",
-      description: "Modern and elegant window blinds for optimal light control, privacy, and sophisticated interior aesthetics.",
-      icon: (
-        <svg className="w-12 h-12 text-[#1A2B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m7 0V5a2 2 0 012-2h2a2 2 0 012 2v6m-6 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v6" />
-        </svg>
-      ), // Window with blinds icon
-    },
-    {
-      title: "TV Sets & Kitchen Installation",
-      description: "Seamless integration of entertainment systems and bespoke kitchen solutions for a truly modern and functional home.",
-      icon: (
-        <svg className="w-12 h-12 text-[#1A2B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2zm12-7h.01M9 17v-4h6v4m-6 0h6m-6 0H6a2 2 0 01-2-2v-4a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2h-2m-6 0h6" />
-        </svg>
-      ), // TV screen and kitchen counter icon
-    },
-    {
-      title: "Smart Home Technology Installation",
-      description: "Transform your living space into an intuitive, connected sanctuary with cutting-edge smart home automation systems.",
-      icon: (
-        <svg className="w-12 h-12 text-[#1A2B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.353 2.572-1.065z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      ), // Gear/Settings icon
-    },
-    {
-      title: "Security & CCTV Installation",
-      description: "Comprehensive security solutions and advanced CCTV systems for ultimate peace of mind and property protection.",
-      icon: (
-        <svg className="w-12 h-12 text-[#1A2B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 002.92 12c0 3.072 1.83 5.768 4.58 7.25C10.743 21.072 12 22 12 22s1.257-1.072 4.499-2.75c2.75-1.482 4.58-4.178 4.58-7.25a12.001 12.001 0 00-3.382-8.016z" />
-        </svg>
-      ), // Shield with checkmark icon
-    },
-    {
-      title: "Interior Styling & Decor",
-      description: "From furniture placement to decorative accents, we curate every detail to reflect your unique style and enhance your home's ambiance.",
-      icon: (
-        <svg className="w-12 h-12 text-[#1A2B4C]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m7 0V5a2 2 0 012-2h2a2 2 0 012 2v6m-6 0V5a2 2 0 00-2-2H9a2 2 0 00-2 2v6" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 18.75a.75.75 0 100-1.5.75.75 0 000 1.5z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 15.75a.75.75 0 100-1.5.75.75 0 000 1.5z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 12.75a.75.75 0 100-1.5.75.75 0 000 1.5z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 9.75a.75.75 0 100-1.5.75.75 0 000 1.5z" />
-        </svg>
-      ), // A window with blinds, symbolizing decor and styling
-    },
-  ];
-
   return (
-    <section id="services" className="py-16 sm:py-20 lg:py-24 bg-white text-gray-800">
-      <div className="container mx-auto px-6 max-w-6xl">
-        {/* Section Title */}
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-playfair-display font-bold text-center mb-12 sm:mb-16 text-[#1A2B4C]">
-          Our Services
-        </h2>
+    <section id="services" aria-labelledby="services-title" className="bg-linen-100 py-24 sm:py-32">
+      <div className="container-x">
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <SectionHeading
+            id="services-title"
+            eyebrow="What we do"
+            title={
+              <>
+                Beautiful windows, <span className="accent">start to finish</span>
+              </>
+            }
+            intro="Curtains and blinds are our speciality. We help you choose, make everything to your exact window measurements, install it properly — and keep it looking fresh."
+          />
+          <a
+            data-reveal
+            href="#contact"
+            className="group inline-flex shrink-0 items-center gap-2 self-start border-b border-navy-900/30 pb-1 text-[0.9375rem] font-semibold text-navy-900 transition-colors hover:border-navy-900 lg:self-auto"
+          >
+            Get a free quote
+            <IconArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </a>
+        </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
-          {services.map((service, index) => (
-            <div
-              key={index}
-              className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col items-center text-center border border-gray-100"
-            >
-              <div className="mb-6">{service.icon}</div>
-              <h3 className="text-2xl font-montserrat font-semibold mb-3 text-[#1A2B4C]">
-                {service.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed font-inter">
-                {service.description}
+        <div className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
+          {/* Custom curtains — the hero card */}
+          <article
+            data-reveal
+            className="group relative isolate flex min-h-[32rem] flex-col justify-end overflow-hidden rounded-[2rem] bg-navy-900 p-7 sm:p-9 md:row-span-2"
+          >
+            <Image
+              src={curtainsImg}
+              alt="Floor-length grey chevron curtains layered over white sheers in a bright living room"
+              fill
+              placeholder="blur"
+              sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
+              className="-z-10 object-cover transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.04]"
+            />
+            <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-t from-navy-950/95 via-navy-950/60 via-45% to-navy-950/0" />
+            <span className="self-start rounded-full border border-white/15 bg-navy-950/50 px-3.5 py-1 backdrop-blur-sm">
+              <Num n="01 — Our speciality" light />
+            </span>
+            <h3 className="mt-4 text-[2.4rem] leading-[1.05] font-light text-linen-50">
+              <span className="whitespace-nowrap">Custom-made</span> curtains
+            </h3>
+            <p className="mt-4 max-w-sm leading-relaxed text-linen-100/85">
+              Made to your exact window size in the fabric, colour and style you love — from airy
+              sheers to blackout, linen and rich velvet.
+            </p>
+            <Chips light items={["Sheers", "Blackout", "Linen", "Velvet", "Any size"]} />
+          </article>
+
+          {/* Window blinds */}
+          <article
+            data-reveal
+            style={{ "--reveal-delay": "100ms" } as CSSProperties}
+            className="group flex flex-col overflow-hidden rounded-[2rem] bg-linen-50 ring-1 ring-navy-900/[0.06]"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <Image
+                src={blindsImg}
+                alt="Close-up of light venetian blinds fitted to a window"
+                fill
+                placeholder="blur"
+                sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
+                className="object-cover object-[50%_35%] transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.05]"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-7 sm:p-8">
+              <div className="flex items-center justify-between">
+                <Num n="02" />
+                <IconBlinds className="size-6 text-brass-600" />
+              </div>
+              <h3 className="mt-3 text-[1.85rem] leading-tight font-light text-navy-900">Window blinds</h3>
+              <p className="mt-3 leading-relaxed text-muted">
+                Roller, zebra (day &amp; night), venetian, vertical and Roman blinds for clean lines and
+                precise control of light and privacy.
               </p>
             </div>
-          ))}
+          </article>
+
+          {/* Installation */}
+          <article
+            data-reveal
+            style={{ "--reveal-delay": "200ms" } as CSSProperties}
+            className="group flex flex-col overflow-hidden rounded-[2rem] bg-linen-50 ring-1 ring-navy-900/[0.06]"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden">
+              <Image
+                src={installImg}
+                alt="Floor-to-ceiling white sheer curtains on a ceiling track beside a tall window"
+                fill
+                placeholder="blur"
+                sizes="(min-width: 1024px) 30vw, (min-width: 768px) 50vw, 100vw"
+                className="object-cover object-[50%_40%] transition-transform duration-[1.4s] ease-out-expo group-hover:scale-[1.05]"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-7 sm:p-8">
+              <div className="flex items-center justify-between">
+                <Num n="03" />
+                <IconDrill className="size-6 text-brass-600" />
+              </div>
+              <h3 className="mt-3 text-[1.85rem] leading-tight font-light text-navy-900">Expert installation</h3>
+              <p className="mt-3 leading-relaxed text-muted">
+                Tracks, rods, brackets and blinds fitted straight, secure and neat — on any wall or
+                ceiling, at any height.
+              </p>
+            </div>
+          </article>
+
+          {/* Curtain washing */}
+          <article
+            data-reveal
+            className="relative flex flex-col overflow-hidden rounded-[2rem] bg-linen-200 p-7 sm:p-8"
+          >
+            {/* fabric swatch with bubbles */}
+            <div aria-hidden="true" className="pointer-events-none absolute top-0 right-0 bottom-0 w-24 sm:w-28">
+              <div className="pleats absolute inset-0 [--fabric:#e5d6bd] [mask-image:linear-gradient(90deg,transparent,#000_45%)]" />
+              <span className="absolute top-[18%] left-2 size-7 rounded-full border border-white/80 bg-white/30" />
+              <span className="absolute top-[38%] left-10 size-4 rounded-full border border-white/80 bg-white/30" />
+              <span className="absolute top-[56%] left-4 size-10 rounded-full border border-white/80 bg-white/25" />
+            </div>
+            <div className="relative max-w-[78%]">
+              <div className="flex items-center gap-3">
+                <span className="grid size-11 place-items-center rounded-full bg-linen-50 text-brass-600">
+                  <IconDrop className="size-5" />
+                </span>
+                <Num n="04" />
+              </div>
+              <h3 className="mt-6 text-[1.85rem] leading-tight font-light text-navy-900">Curtain washing</h3>
+              <p className="mt-3 leading-relaxed text-muted">
+                Professional washing that keeps your curtains fresh, bright and hanging beautifully.
+              </p>
+            </div>
+          </article>
+
+          {/* Window automation */}
+          <article
+            data-reveal
+            style={{ "--reveal-delay": "100ms" } as CSSProperties}
+            className="relative flex flex-col overflow-hidden rounded-[2rem] bg-navy-900 p-7 text-linen-50 sm:p-8"
+          >
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -top-24 -right-24 size-64 rounded-full bg-[radial-gradient(closest-side,rgb(201_166_107/0.28),transparent)]"
+            />
+            <div className="relative flex items-center gap-3">
+              <span className="grid size-11 place-items-center rounded-full bg-white/10 text-brass-300">
+                <IconRemote className="size-5" />
+              </span>
+              <Num n="05" light />
+            </div>
+            {/* mini control */}
+            <div aria-hidden="true" className="relative mt-6 rounded-2xl border border-white/10 bg-white/[0.06] p-3.5">
+              <div className="flex items-center justify-between text-xs text-linen-100/70">
+                <span>Bedroom blinds</span>
+                <span className="font-semibold text-brass-300">75% open</span>
+              </div>
+              <div className="mt-2.5 h-1.5 rounded-full bg-white/10">
+                <div className="h-full w-3/4 rounded-full bg-gradient-to-r from-brass-500 to-brass-300" />
+              </div>
+            </div>
+            <h3 className="relative mt-6 text-[1.85rem] leading-tight font-light">Window automation</h3>
+            <p className="relative mt-3 leading-relaxed text-linen-100/75">
+              Motorised curtains and blinds you control with a remote, your phone or your voice.
+            </p>
+            <a
+              href="#automation"
+              className="group relative mt-6 inline-flex items-center gap-2 self-start text-[0.9375rem] font-semibold text-brass-300 hover:text-brass-200"
+            >
+              See how it works
+              <IconArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </a>
+          </article>
         </div>
       </div>
     </section>

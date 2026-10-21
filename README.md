@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# B17 Windows & Curtains — website
 
-## Getting Started
+Made-to-measure curtains, blinds and window automation, all across Ghana.
+Built with [Next.js](https://nextjs.org) 15, React 19 and Tailwind CSS 4. Hosted on Netlify.
 
-First, run the development server:
+## Run it on your computer
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Publish
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Commit and push to `main` on GitHub. Netlify builds and publishes the site automatically
+(build command `npm run build`).
 
-## Learn More
+Optional: in Netlify → Site configuration → Environment variables, add
+`NEXT_PUBLIC_SITE_URL` with your final address (e.g. `https://www.yourdomain.com`) so
+Google and social-media previews use the right link. Without it, Netlify's own site URL is used.
 
-To learn more about Next.js, take a look at the following resources:
+## Editing the content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Almost all the text lives in **`src/content/site.ts`**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| What | Where |
+| --- | --- |
+| Phone, WhatsApp number, email, address, Instagram/TikTok, Google review link | `site` in `site.ts` |
+| Customer reviews | `testimonials` in `site.ts` |
+| Questions & answers | `faqs` in `site.ts` |
+| Options in the contact form | `serviceOptions`, `propertyOptions` in `site.ts` |
+| Client logos and names in the moving strip | **`src/content/clients.ts`** |
 
-## Deploy on Vercel
+### Clients strip
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **With a logo:** save the logo (transparent PNG or SVG) in `src/assets/clients/`, import it at the
+  top of `clients.ts` and add it to `clientLogos`. Add `scale: 0.9` (or `1.1`) if one logo looks
+  too big or too small next to the others.
+- **Without a logo:** add the name to `clientNames` — it is shown as elegant text. `detail` is the
+  small line underneath (e.g. the area).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Reviews
+
+One review is shown as a large featured quote; add a second and they switch to cards automatically.
+
+### Photos
+
+Photos live in `src/assets/images/` (already resized for the web — keep new photos under ~2000 px wide).
+
+- Gallery: `src/components/projects.tsx`
+- Service cards: `src/components/services.tsx`
+- Hero (top of page): `src/components/hero.tsx`
+
+Real photos of your own finished projects will make the biggest difference — swap them in
+whenever you have them.
+
+### How the contact form works
+
+The form doesn't need a server or email service. When someone presses **Send via WhatsApp**,
+it opens WhatsApp with their details already written out, addressed to the number in
+`site.whatsappNumber`. They just tap Send.
+
+## Project structure
+
+```
+src/
+  app/            layout (fonts, SEO), page, icons, social preview image
+  components/     one file per section (hero, services, automation, gallery…)
+  content/site.ts all editable text
+  lib/            WhatsApp link helpers, site URL
+  assets/images/  optimised photos
+  fonts/          Fraunces + Manrope (open-source, self-hosted)
+```
+
+The original full-size photos and logo are still in `public/images/`.
